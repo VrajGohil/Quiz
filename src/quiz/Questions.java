@@ -5,10 +5,11 @@
  */
 package quiz;
 import java.sql.*;
+import java.util.*;
 /**
  *
- * @author Vraj
- */    
+ * @author Yash
+ */
 public class Questions{
     String question;
     String option1;
@@ -24,19 +25,15 @@ public class Questions{
         this.option4=option4;
         this.answer=answer;
     }
-   /* public static void main(String[] args) {
-       System.out.println("Hello"); 
-        try{
-            Connection c=DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\Vraj\\Documents\\NetBeansProjects\\Quiz\\src\\quiz\\Quiz.accdb");
+    public static void main(String[] args) {
+      try{
+            
+            Connection c=DriverManager.getConnection("jdbc:ucanaccess://D:\\yash\\Atom\\Quiz\\Quiz-master\\Quiz-master\\src\\quiz\\Quiz.accdb");
             Statement st=c.createStatement();
-            ResultSet rs=st.executeQuery("select * from questions");
-            while(rs.next()){
-                System.out.println(rs.getString(1) + rs.getString(2)+"Hello");
-            }
-
+            ResultSet rs=st.executeQuery("select * from questions order by rand() limit 10");
         }
         catch(SQLException ee){System.out.println(ee);}
 
-    }*/
+       
+    }
 }
-    
