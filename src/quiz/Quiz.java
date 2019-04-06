@@ -46,7 +46,7 @@ public class Quiz extends Applet implements ItemListener,ActionListener,Runnable
     
     try{
         Connection c;
-        c = DriverManager.getConnection("jdbc:ucanaccess://D:\\yash\\Atom\\Quiz\\Quiz-master\\Quiz-master\\src\\quiz\\Quiz.accdb");
+        c = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\Vraj\\Documents\\quiz\\Quiz-master\\src\\quiz\\Quiz.accdb");
         Statement st=c.createStatement();
         ResultSet rs=st.executeQuery("select * from questions order by rand() limit 10");
         while(rs.next()){
@@ -95,7 +95,7 @@ public class Quiz extends Applet implements ItemListener,ActionListener,Runnable
     if(ans==answer)
     {
         lab.setText("Correct Answer");
-        Score.setText("Score:"+(++score));
+        Score.setText("Score:"+(score+=score+5*time));
         if(i==question.size()+1)
             fun1();
         else
@@ -173,6 +173,21 @@ public class Quiz extends Applet implements ItemListener,ActionListener,Runnable
   remove(name);
   
   lab.setText("Your Total Score is:"+score);
+  try{
+        Connection cs;
+        cs = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\Vraj\\Documents\\quiz\\Quiz-master\\src\\quiz\\Quiz.accdb");
+        Statement st=cs.createStatement();
+        String query = "insert into scoreboard values ('"+Name.getText()+"',"+score+")";
+        st.executeUpdate(query);
+        ResultSet r=st.executeQuery("select * from scoreboard order by score desc limit 10");
+        while(r.next()){
+            System.out.println(r.getString(1)+" | "+r.getInt(2));
+        }
+        cs.close();
+    }
+    catch(SQLException ee){
+        System.out.println(ee);
+    }
   try{
               Thread.sleep(5000);
               System.exit(0);
