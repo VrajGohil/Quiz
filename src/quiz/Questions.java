@@ -25,15 +25,4 @@ public class Questions{
         this.option4=option4;
         this.answer=answer;
     }
-    public static void main(String[] args) {
-      try{
-            
-            Connection c=DriverManager.getConnection("jdbc:ucanaccess://D:\\yash\\Atom\\Quiz\\Quiz-master\\Quiz-master\\src\\quiz\\Quiz.accdb");
-            Statement st=c.createStatement();
-            ResultSet rs=st.executeQuery("select * from questions order by rand() limit 10");
-        }
-        catch(SQLException ee){System.out.println(ee);}
-
-       
-    }
 }
